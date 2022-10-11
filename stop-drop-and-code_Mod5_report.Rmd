@@ -38,6 +38,7 @@ dat <- do.call(rbind,dat.l) #combine the list into table
 dat%>%
   ggplot()+geom_boxplot(aes(x=activity,y=degC))+facet_grid(.~who) + labs(caption="Figure 1. Mean Axial Body Temperature Between Resting and Active States by Subject") + theme(plot.caption=element_text(hjust=0.5) )
 ```
+
 ## Results Summary
 
 # Discussion
