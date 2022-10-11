@@ -48,7 +48,7 @@ dat%>%
 From our results we can conclude that body temperature does vary in human subjects according to activity level. The mean active body temperatures for Jordan, Michael, and RachelZ are all higher than their mean resting body temperatures. The mean active body temperature vs mean resting body temperature for RachelR does not follow this trend. RachelR's mean active body temperature appears to be slightly lower than her mean resting temperature. We conclude that this discrepancy is a result of experimental error, possibly from incorrect placement of the temperature sensor, or from interference with the clothes RachelR was wearing when her temperature was taken. 
 
 # Discussion
-@gleeson1998temperature reports that during strenuous exercise, the body may produce upwards of 1000 W of heat. Some of that heat is stored, ultimately raising the body's core temperature by a few degrees. The body has biological mechanisms to cool down the system, like evaporation f
+@gleeson1998temperature reports that during strenuous exercise, the body may produce upwards of 1000 W of heat. Some of that heat is stored, ultimately raising the body's core temperature by a few degrees. The body has biological mechanisms to cool down the system, like evaporation of sweat and increased skin blood flow, however hot environments or inappropriate clothing may compromise the ability to lose heat from the body. This confirms that our results for body temperature are congruent with previous findings. 
 
 # Author Contributions
 
