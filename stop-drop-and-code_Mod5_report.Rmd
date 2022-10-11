@@ -20,8 +20,7 @@ It has been previously established that body temperature and thermoregulation pl
 # Methods
 
 # Results
-
-```{r cars}
+```{r}
 library(tidyverse)
 dat.f <- list.files(pattern = "couch|active.csv") #find the files
 
@@ -35,9 +34,12 @@ for(i in dat.f){
     mutate(who=who,activity=activity)#read, then store data with additional columns of metada in list as position unique to i
 }
 dat <- do.call(rbind,dat.l) #combine the list into table
+```
 
+```{r}
 dat%>%
-  ggplot()+geom_boxplot(aes(x=activity,y=degC))+facet_grid(.~who) #plot to see what we get
+  ggplot()+geom_boxplot(aes(x=activity,y=degC))+facet_grid(.~who) + labs(caption="Figure 1. Mean Axial Body Temperature Between Resting and Active States by Subject") + theme(plot.caption=element_text(hjust=0.5) )
+
 ```
 
 # Author Contributions
