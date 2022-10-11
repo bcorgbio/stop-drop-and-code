@@ -3,7 +3,7 @@ title: "Module 5 Project Report"
 author: "stop_drop_and_code"
 date: "2022-10-10"
 output: html_document
-bibliography: [Mod5project.bib, module5bib2.bib]
+bibliography: [Mod5project.bib]
 ---
 ```{r, include=FALSE}
 library(tidyverse)
@@ -52,7 +52,7 @@ From our results we can conclude that body temperature does vary in human subjec
 >>>>>>> 86466f1ca77c521e124b1b77ddc62f543704dbef
 
 # Discussion
-
+@gleeson1998temperature reports that during strenuous exercise, the body may produce upwards of 1000 W of heat. Some of that heat is stored, ultimately raising the body's core temperature by a few degrees. The body has biological mechanisms to cool down the system, like evaporation of sweat and increased skin blood flow, however hot environments or inappropriate clothing may compromise the ability to lose heat from the body. This confirms that our results for body temperature are congruent with previous findings. 
 
 # Author Contributions
 
