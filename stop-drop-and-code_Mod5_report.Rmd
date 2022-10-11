@@ -3,8 +3,11 @@ title: "Module 5 Project Report"
 author: "stop_drop_and_code"
 date: "2022-10-10"
 output: html_document
-bibliography: 
 ---
+```{r, include=FALSE}
+library(tidyverse)
+library(knitr)
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -12,9 +15,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #Introduction
 
+
 #Methods
 
 #Results
+
 ```{r cars}
 library(tidyverse)
 dat.f <- list.files(pattern = "couch|active.csv") #find the files
@@ -26,11 +31,10 @@ for(i in dat.f){
   who <- met.dat[1] #store the first element
   activity <- gsub(".csv","",met.dat[2]) #store second element, dropping CSV with gsub()
   dat.l[[i]]<- read_csv(i)%>%
-    mutate(who=who,activity=activity) #read, then store data with additional columns of metada in list as position unique to i
+    mutate(who=who,activity=activity)#read, then store data with additional columns of metada in list as position unique to i
 }
 dat <- do.call(rbind,dat.l) #combine the list into table
-```
-```{r, fig.cap="Box}
+
 dat%>%
   ggplot()+geom_boxplot(aes(x=activity,y=degC))+facet_grid(.~who) #plot to see what we get
 ```
@@ -40,5 +44,13 @@ plot(pressure)
 ```
 
 #Author Contributions
+
+Rachel R: Arduino setup and code
+
+Rachel Z:
+
+Jordan:
+
+Michael: Data collection and production of .csv files, Results section, 
 
 #References
