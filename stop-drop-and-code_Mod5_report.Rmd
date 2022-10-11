@@ -40,15 +40,21 @@ dat <- do.call(rbind,dat.l) #combine the list into table
 dat%>%
   ggplot()+geom_boxplot(aes(x=activity,y=degC))+facet_grid(.~who) + labs(caption="Figure 1. Mean Axial Body Temperature Between Resting and Active States by Subject") + theme(plot.caption=element_text(hjust=0.5) )
 ```
-## Results Summary
+
+### Results Summary
+
+*Does body temperature vary in human subjects according to activity level?*
+
+From our results we can conclude that body temperature does vary in human subjects according to activity level. The mean active body temperatures for Jordan, Michael, and RachelZ are all higher than their mean resting body temperatures. The mean active body temperature vs mean resting body temperature for RachelR does not follow this trend. RachelR's mean active body temperature appears to be slightly lower than her mean resting temperature. We conclude that this discrepancy is a result of experimental error, possibly from incorrect placement of the temperature sensor, or from interference with the clothes RachelR was wearing when her temperature was taken. 
 
 # Discussion
+
 
 # Author Contributions
 
 Rachel R: Arduino setup and code
 
-Rachel Z:
+Rachel Z: Results Summary and Discussion
 
 Jordan:
 
