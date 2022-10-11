@@ -3,6 +3,7 @@ title: "Module 5 Project Report"
 author: "stop_drop_and_code"
 date: "2022-10-10"
 output: html_document
+bibliography: Mod5project.bib
 ---
 ```{r, include=FALSE}
 library(tidyverse)
@@ -13,12 +14,12 @@ library(knitr)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#Introduction
+# Introduction
+It has been previously established that body temperature and thermoregulation play integral roles in maintaining homeostasis of the body during forms of physical activity. @Lim2008human reports that metabolic rate increases drastically during physical activity. Furthermore, this increase in metabolic rate causes an increase in heat production. However, thermoregulation allows us to continue to function and sustains physiological processes. Hyperthermia may also be utilized by the central nervous system to act as a limiting mechanism to prevent damage to the body. This experiment investigates the effect of physical activity on body temperature in humans using temperature sensors. 
 
+# Methods
 
-#Methods
-
-#Results
+# Results
 
 ```{r cars}
 library(tidyverse)
@@ -39,11 +40,7 @@ dat%>%
   ggplot()+geom_boxplot(aes(x=activity,y=degC))+facet_grid(.~who) #plot to see what we get
 ```
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-#Author Contributions
+# Author Contributions
 
 Rachel R: Arduino setup and code
 
@@ -51,6 +48,6 @@ Rachel Z:
 
 Jordan:
 
-Michael: Data collection and production of .csv files, Results section, 
+Michael: Data collection and production of .csv files, Introduction, Results, 
 
-#References
+# References
