@@ -21,7 +21,7 @@ It has been previously established that body temperature and thermoregulation pl
 The effect of physical activity on body temperature was assessed by collecting readings of axillary body temperature readings during a resting state and after a period of physical activity. The resting state was defined as having a resting heart rate while sitting on a couch. The active state was defined as being five minute of jumping jacks. Temperature in Celsius was recorded for 100 seconds during the resting state and after the active state in the axillary (armpit) region of each subject. An Arduino unit was used as a prototype along with a DHT11 temperature sensor to measure temperature data. 
 
 # Results
-```{r}
+```{r, include=FALSE}
 library(tidyverse)
 dat.f <- list.files(pattern = "couch|active.csv") #find the files
 
@@ -35,6 +35,8 @@ for(i in dat.f){
     mutate(who=who,activity=activity)#read, then store data with additional columns of metada in list as position unique to i
 }
 dat <- do.call(rbind,dat.l) #combine the list into table
+```
+```{r, echo=FALSE}
 dat%>%
   ggplot()+geom_boxplot(aes(x=activity,y=degC))+facet_grid(.~who) + labs(caption="Figure 1. Mean Axial Body Temperature Between Resting and Active States by Subject") + theme(plot.caption=element_text(hjust=0.5) )
 ```
