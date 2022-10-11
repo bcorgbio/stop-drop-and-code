@@ -3,7 +3,7 @@ title: "Module 5 Project Report"
 author: "stop_drop_and_code"
 date: "2022-10-10"
 output: html_document
-bibliography: Mod5project.bib
+bibliography: [Mod5project.bib, module5bib2.bib]
 ---
 ```{r, include=FALSE}
 library(tidyverse)
