@@ -57,7 +57,7 @@ Rachel R: Arduino setup and code
 
 Rachel Z: Results Summary and Discussion
 
-Jordan:
+Jordan: Results, Discussion, Data Collection
 
 Michael: Data collection and production of .csv files, Introduction, Results, Methods
 
