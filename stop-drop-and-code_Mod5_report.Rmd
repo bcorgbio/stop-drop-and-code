@@ -41,18 +41,15 @@ dat%>%
   ggplot()+geom_boxplot(aes(x=activity,y=degC))+facet_grid(.~who) + labs(caption="Figure 1. Mean Axial Body Temperature Between Resting and Active States by Subject") + theme(plot.caption=element_text(hjust=0.5) )
 ```
 
-<<<<<<< HEAD
-## Results Summary
-=======
 ### Results Summary
+
+The mean active body temperatures for Jordan, Michael, and RachelZ are all higher than their mean resting body temperatures. The mean active body temperature vs mean resting body temperature for RachelR does not follow this trend. RachelR's mean active body temperature appears to be slightly lower than her mean resting temperature. 
+
+# Discussion
 
 *Does body temperature vary in human subjects according to activity level?*
 
-From our results we can conclude that body temperature does vary in human subjects according to activity level. The mean active body temperatures for Jordan, Michael, and RachelZ are all higher than their mean resting body temperatures. The mean active body temperature vs mean resting body temperature for RachelR does not follow this trend. RachelR's mean active body temperature appears to be slightly lower than her mean resting temperature. We conclude that this discrepancy is a result of experimental error, possibly from incorrect placement of the temperature sensor, or from interference with the clothes RachelR was wearing when her temperature was taken. 
->>>>>>> 86466f1ca77c521e124b1b77ddc62f543704dbef
-
-# Discussion
-@gleeson1998temperature reports that during strenuous exercise, the body may produce upwards of 1000 W of heat. Some of that heat is stored, ultimately raising the body's core temperature by a few degrees. The body has biological mechanisms to cool down the system, like evaporation of sweat and increased skin blood flow, however hot environments or inappropriate clothing may compromise the ability to lose heat from the body. This confirms that our results for body temperature are congruent with previous findings. 
+From our results we can conclude that body temperature does vary in human subjects according to activity level. @gleeson1998temperature reports that during strenuous exercise, the body may produce upwards of 1000 W of heat. Some of that heat is stored, ultimately raising the body's core temperature by a few degrees. There was a discrepancy in results with RachelR's body temperature, however we conclude that this discrepancy is a result of experimental error, possibly from incorrect placement of the temperature sensor, or from interference with the clothes RachelR was wearing when her temperature was taken. These findings are congruent to our results, and support the idea that body temperature rises as a result of physical activity. 
 
 # Author Contributions
 
