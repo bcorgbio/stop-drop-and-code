@@ -35,10 +35,20 @@ for(i in dat.f){
     mutate(who=who,activity=activity)#read, then store data with additional columns of metada in list as position unique to i
 }
 dat <- do.call(rbind,dat.l) #combine the list into table
+
+#Calculating mean and sd of data by activity and person
+mean_temp<-dat%>%
+group_by(activity,who)%>%
+  summarise_at(vars(degC),list(mean_degC=mean,sd_degC=sd))%>%
+  print()
 ```
 ```{r, echo=FALSE}
 dat%>%
   ggplot()+geom_boxplot(aes(x=activity,y=degC))+facet_grid(.~who) + labs(caption="Figure 1. Mean Axial Body Temperature Between Resting and Active States by Subject") + theme(plot.caption=element_text(hjust=0.5) )
+
+#plotting the means +/- 1SD
+mean_temp%>%
+  ggplot(aes(x=activity,y=mean_degC))+geom_point(size=5, color="pink")+facet_grid(.~who)+geom_errorbar(aes(ymin=mean_degC-sd_degC,ymax=mean_degC+sd_degC),width=0.3)
 ```
 
 ### Results Summary
