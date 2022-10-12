@@ -63,7 +63,7 @@ The difference between sedentary and active body temperature as seen in the resu
 
 # Author Contributions
 
-Rachel R: Arduino setup and code
+Rachel R: Arduino setup, Arduino and R code, data collection 
 
 Rachel Z: Results Summary and Discussion
 
