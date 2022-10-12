@@ -53,13 +53,13 @@ mean_temp%>%
 
 ### Results Summary
 
-The mean active body temperatures for Jordan, Michael, and RachelZ are all higher than their mean resting body temperatures. The mean active body temperature vs mean resting body temperature for RachelR does not follow this trend. RachelR's mean active body temperature appears to be slightly lower than her mean resting temperature. 
+Our results show that 3/4 (Jordan, Michael, RachelZ) group members had higher mean active body temperatures than mean sedentary body temperatures. RachelR's mean active body temperature is slightly lower than her mean resting temperature, and the difference between mean active body temperature and mean resting body temperature for RachelR is also slightly lower than Jordan, Michael, and RachelZ's temperature differences. The SD error bars show that there was a smaller spread for RachelR's temperatures compared with the rest of the group members.
 
 # Discussion
 
 *Does body temperature vary in human subjects according to activity level?*
 
-From our results we can conclude that body temperature does vary in human subjects according to activity level. @gleeson1998temperature reports that during strenuous exercise, the body may produce upwards of 1000 W of heat. Some of that heat is stored, ultimately raising the body's core temperature by a few degrees. There was a discrepancy in results with RachelR's body temperature, however we conclude that this discrepancy is a result of experimental error, possibly from incorrect placement of the temperature sensor, or from interference with the clothes RachelR was wearing when her temperature was taken. These findings are congruent to our results, and support the idea that body temperature rises as a result of physical activity. 
+The difference between sedentary and active body temperature as seen in the results section demonstrates that the temperature of the human body does not change significantly, in spite of physical exercise. According to @wendt2007thermoregulation, during exercise, several powerful physiological mechanisms of heat loss are activated to prevent an excessive rise in body core temperature. These findings are congruent to our results, and demonstrate that our bodies are capable of thermoregulation. 
 
 # Author Contributions
 
