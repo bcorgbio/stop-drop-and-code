@@ -45,7 +45,7 @@ group_by(activity,who)%>%
 ```{r, echo=FALSE}
 #plotting the data, means, +/- 1SD
 mean_temp%>%
-  ggplot(aes(x=activity,y=mean_degC))+geom_point(size=5, color="pink")+facet_grid(.~who)+geom_errorbar(aes(ymin=mean_degC-sd_degC,ymax=mean_degC+sd_degC),width=0.3)+labs(caption="Mean of Axial Body Temperature Between Resting and Active States by Subject including +/- 1 Standard Deviation")
+  ggplot(aes(x=activity,y=mean_degC))+geom_point(size=5, color="pink")+facet_grid(.~who)+geom_errorbar(aes(ymin=mean_degC-sd_degC,ymax=mean_degC+sd_degC),width=0.3)+labs(caption="Figure 1. Mean of Axial Body Temperature Between Resting and Active States by Subject including +/- 1 Standard Deviation")
 ```
 
 ### Results Summary
