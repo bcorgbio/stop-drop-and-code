@@ -6,11 +6,14 @@ output: html_document
 bib: BIOL3140.bib
 ---
 
-Introduction
-Methods
-Results
-Discussion
-Author Contributions: Rachel (Methods)
+#Introduction
+
+#Methods
+#Results
+#Discussion
+#Author Contributions: 
+Rachel Z. (Introduction)
+Rachel R. (Methods)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
