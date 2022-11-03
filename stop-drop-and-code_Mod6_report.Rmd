@@ -1,44 +1,41 @@
 ---
 title: "Module 6 Report"
 author: "stop_drop_and_code"
-date: "2022-11-02"
+date: "2022-11-06"
 output: html_document
-bib: BIOL3140.bib
+bibliography: BIOL3140.bib
 ---
 
-#Introduction
+## Wing Shape Evolution in the Lepidoptera
 
-#Methods
-#Results
-#Discussion
+### Introduction
+
+### Methods
+
+*Are the rates of wing-shape evolution different between the hind- and forewing? By how much?* <br>
+<br>
+To analyze the rate of wing-shape evolution in the Lepidoptera, photos of specimens across the entire order were first compiled using images cataloged in the Global Biodiversity Information Facility database. Approximately 200 species were included in this report. Wing shape was then digitized with the image analysis program FIJI. <br>
+<br>
+Outline-based shape analysis was performed using an elliptical Fourier transformation. To account for arbitrary differences in wing size due to the orientation of the original photos, a generalized Procrustes transformation was first applied. With this outline data, Principal Components Analysis was used to quantify the amount of variance observed due to a particular principal component (PC). These operations were run with the R package Momocs. When outlines were separately analyzed according to whether they were fore- or hind-wing, separate PC scores were obtained and compared. 
+
+*Have major lineages of the Lepidoptera undergone significant shifts in evolutionary rate?* <br>
+<br>
+The phylogenetic tree used in the analysis of this report was created by @kawahara2019. To compare the rates of evolution throughout major Lepidoptera lineages, phylogenetic ridge regression by @kratsch2014 was used in the R package RRphylo.
+
+*Are hind- and forewing shapes correlated?*
+
+### Results
+### Discussion
 *(1)Do hind- and forewings vary in their evolutionary rates? (2)Does the evolvability of the hind- and forewings vary significantly among major lineages of moths and butterflies? (3)Is hindwing and forewing shape correlated?*
 
 
-#Author Contributions: 
+### Author Contributions 
 Rachel Z. (Introduction)
-Rachel R. (Methods)
+Rachel R. (Methods, Bibliography)
 Jordan Nunes (Discussion)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### Bibliography
