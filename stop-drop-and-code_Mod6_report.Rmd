@@ -25,6 +25,15 @@ The phylogenetic tree used in the analysis of this report was created by @kawaha
 *Are hind- and forewing shapes correlated?*
 
 ### Results
+```{r, include=FALSE}
+library(tidyverse)
+library(Momocs)
+library(ape)
+library(phytools)
+library(RRphylo)
+```
+
+
 ### Discussion
 *(1)Do hind- and forewings vary in their evolutionary rates? (2)Does the evolvability of the hind- and forewings vary significantly among major lineages of moths and butterflies? (3)Is hindwing and forewing shape correlated?*
 
@@ -33,6 +42,7 @@ The phylogenetic tree used in the analysis of this report was created by @kawaha
 Rachel Z. (Introduction)
 Rachel R. (Methods, Bibliography)
 Jordan Nunes (Discussion)
+Michael Britt (Results)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
