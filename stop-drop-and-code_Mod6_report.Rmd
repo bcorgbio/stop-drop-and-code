@@ -25,14 +25,69 @@ The phylogenetic tree used in the analysis of this report was created by @kawaha
 *Are hind- and forewing shapes correlated?*
 
 ### Results
-```{r, include=FALSE}
+```{r, "Setup & Shape Analysis", include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(Momocs)
 library(ape)
 library(phytools)
 library(RRphylo)
+library(vroom)
+library(ape)
+library(ggtree)
+library(wesanderson)
+setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology")
+f <- list.files("class_out_data",pattern=".txt|.csv",full.names = TRUE)
+out <- read_delim(f[1],delim="\t") %>% 
+  as.matrix()
+out %>%
+  list() %>%
+  Out() %>%
+  coo_flipx() %>%
+  stack()
+out.df <- vroom::vroom(f, id = "filename")
+out.df <- out.df %>% 
+  mutate(wing=gsub("XY_.+_(hindwing|forewing)\\..+","\\1",basename(filename))) %>% 
+  na.omit()
+outs.l <- sapply(f,function(x) out.df %>% filter(filename==x) %>% select(X,Y) %>% as.matrix)
+wings <- gsub("XY_.+_(hindwing|forewing)\\..+","\\1",basename(names(outs.l)))
+outs <-  outs.l %>% 
+  Out(fac=list(wing=wings)) %>% 
+  coo_flipx()
+forewings <- outs %>% 
+  filter(wing=="forewing")
+hindwings <- outs %>% 
+  filter(wing=="hindwing")
+
+#Not sure if I need to include from here to the end of the chunk
+forewings %>% 
+  stack()
+
+hindwings %>% 
+  stack()
+
 ```
 
+```{r, "Comparative Analysis: EFA and PCA", include=FALSE}
+
+fore.min <- forewings %>% 
+  coo_nb() %>% 
+  min()
+forewings %>%
+  coo_interpolate(fore.min) %>% 
+  fgProcrustes() %>% 
+  stack()
+hind.min <- hindwings %>% 
+  coo_nb() %>% 
+  min()
+hindwings %>% 
+  coo_interpolate(hind.min) %>% 
+  coo_slide(id=1) %>% 
+  coo_align()  %>%
+  fgProcrustes() %>%
+  stack()
+
+```
 
 ### Discussion
 *(1)Do hind- and forewings vary in their evolutionary rates? (2)Does the evolvability of the hind- and forewings vary significantly among major lineages of moths and butterflies? (3)Is hindwing and forewing shape correlated?*
