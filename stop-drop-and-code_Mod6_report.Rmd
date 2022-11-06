@@ -68,8 +68,7 @@ hindwings %>%
 
 ```
 
-```{r, "Comparative Analysis: EFA and PCA", include=FALSE}
-
+```{r, "Comparative Analysis: EFA and PCA Setup", include=FALSE}
 fore.min <- forewings %>% 
   coo_nb() %>% 
   min()
@@ -87,6 +86,41 @@ hindwings %>%
   fgProcrustes() %>%
   stack()
 
+forewings %>%
+  coo_interpolate(fore.min) %>% 
+  coo_align()  %>%
+  fgProcrustes() %>% 
+  efourier(norm=FALSE) 
+
+hindwings %>% 
+  coo_interpolate(hind.min) %>% 
+  coo_align()  %>%
+  fgProcrustes() %>% 
+  efourier(norm=FALSE) 
+
+forewing.pca <- forewings %>%
+  coo_interpolate(fore.min) %>%
+  coo_align()  %>%
+  coo_slide(id=1) %>% 
+  fgProcrustes() %>% 
+  efourier(norm=FALSE) %>% 
+  PCA()
+
+hindwing.pca <- hindwings %>% 
+  coo_interpolate(hind.min) %>% 
+  coo_align()  %>%
+  coo_slide(id=1) %>% 
+  fgProcrustes() %>% 
+  efourier(norm=FALSE) %>% 
+  PCA()
+```
+#### PCA Analysis 
+```{r, echo=FALSE, message=FALSE}
+forewing.pca %>% 
+  plot_PCA(title = "forewings")
+
+hindwing.pca %>% 
+  plot_PCA(title = "hindwings")
 ```
 
 ### Discussion
