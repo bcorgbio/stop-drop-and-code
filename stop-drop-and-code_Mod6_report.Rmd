@@ -117,7 +117,7 @@ hindwing.pca %>%
 ```
 
 ```{r, "Comparative Analysis", include=FALSE}
-setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology/Project 6")
+
 lep.tree <- ape::read.tree("lep_tree2.tre")
 lep.tree <- ladderize(lep.tree)
 lep.tree$tip.label <- gsub("_"," ",lep.tree$tip.label)
