@@ -186,6 +186,7 @@ forePC2.BM<-brownie.lite(lep.tree2,fore.pc2*10)
 hindPC2.BM<-brownie.lite(lep.tree2,hind.pc2*10)
 ```
 
+
 ### Discussion
 *(1)Do hind- and forewings vary in their evolutionary rates? (2)Does the evolvability of the hind- and forewings vary significantly among major lineages of moths and butterflies? (3)Is hindwing and forewing shape correlated?*
 
