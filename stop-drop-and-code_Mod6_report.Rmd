@@ -26,7 +26,7 @@ The phylogenetic tree used in the analysis of this report was created by @kawaha
 *Are hind- and forewing shapes correlated?*
 
 ### Results
-```{r, "Setup & Shape Analysis", include=FALSE}
+```{r, "Setup", include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(Momocs)
@@ -37,7 +37,7 @@ library(vroom)
 library(ape)
 library(ggtree)
 library(wesanderson)
-setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology")
+setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology/Project 6")
 f <- list.files("class_out_data",pattern=".txt|.csv",full.names = TRUE)
 out <- read_delim(f[1],delim="\t") %>% 
   as.matrix()
@@ -59,17 +59,9 @@ forewings <- outs %>%
   filter(wing=="forewing")
 hindwings <- outs %>% 
   filter(wing=="hindwing")
-
-#Not sure if I need to include from here to the end of the chunk
-forewings %>% 
-  stack()
-
-hindwings %>% 
-  stack()
-
 ```
 
-```{r, "Comparative Analysis: EFA and PCA Setup", include=FALSE}
+```{r, "Shape Analysis: EFA and PCA", include=FALSE}
 fore.min <- forewings %>% 
   coo_nb() %>% 
   min()
@@ -122,6 +114,76 @@ forewing.pca %>%
 
 hindwing.pca %>% 
   plot_PCA(title = "hindwings")
+```
+
+```{r, "Comparative Analysis", include=FALSE}
+setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology/Project 6")
+lep.tree <- ape::read.tree("lep_tree2.tre")
+lep.tree <- ladderize(lep.tree)
+lep.tree$tip.label <- gsub("_"," ",lep.tree$tip.label)
+lep.sp <- read_csv("lep_image_data.csv")
+out.data <- tibble(xy.file=basename(names(outs))) %>% 
+  mutate(identifier=gsub("XY_|_hindwing|_forewing|.txt","",xy.file)) %>% 
+  left_join(lep.sp)
+hindwing.pca2 <-  tibble(xy.file=basename(rownames(hindwing.pca$x)),PC1=hindwing.pca$x[,1],PC2=hindwing.pca$x[,2]) %>% 
+  left_join(out.data)
+forewing.pca2 <-  tibble(xy.file=basename(rownames(forewing.pca$x)),PC1=forewing.pca$x[,1],PC2=forewing.pca$x[,2])%>% 
+  left_join(out.data)
+```
+
+```{r, "Evolutionary Rate Analysis", include=FALSE}
+drops <- lep.tree$tip.label[!lep.tree$tip.label%in%unique(out.data$species)]
+lep.tree2 <- drop.tip(lep.tree,drops)
+#PC1s
+hind.pc1 <- hindwing.pca2 %>% 
+    filter(species%in% lep.tree2$tip.label) %>% 
+  group_by(species) %>% 
+  summarize(PC1=mean(PC1)) %>% 
+  pull
+names(hind.pc1) <-  hindwing.pca2%>% 
+    filter(species%in% lep.tree2$tip.label) %>% 
+  group_by(species) %>% 
+  summarize(PC1=mean(PC1)) %>% 
+  pull(species)
+fore.pc1 <- forewing.pca2 %>% 
+    filter(species%in% lep.tree2$tip.label) %>% 
+   group_by(species) %>% 
+  summarize(PC1=mean(PC1)) %>% 
+  pull(PC1)
+names(fore.pc1) <-  forewing.pca2 %>% 
+  filter(species%in% lep.tree2$tip.label) %>% 
+     group_by(species) %>% 
+  summarize(PC1=mean(PC1)) %>% 
+  pull(species)
+#PC2s
+hind.pc2 <- hindwing.pca2 %>% 
+    filter(species%in% lep.tree2$tip.label) %>% 
+  group_by(species) %>% 
+  summarize(PC2=mean(PC2)) %>% 
+  pull(PC2)
+names(hind.pc2) <-  hindwing.pca2%>% 
+    filter(species%in% lep.tree2$tip.label) %>% 
+  group_by(species) %>%
+  summarize(PC2=mean(PC2)) %>% 
+  pull(species)
+fore.pc2 <- forewing.pca2 %>% 
+    filter(species%in% lep.tree2$tip.label) %>% 
+   group_by(species) %>% 
+  summarize(PC2=mean(PC2)) %>% 
+  pull(PC2)
+names(fore.pc2) <-  forewing.pca2 %>% 
+  filter(species%in% lep.tree2$tip.label) %>% 
+     group_by(species) %>% 
+  summarize(PC2=mean(PC2)) %>% 
+  pull(species)
+```
+#### Evolutionary Rates Analysis
+```{r, "Evolutionary Rates", include=TRUE}
+forePC1.BM<-brownie.lite(lep.tree2,fore.pc1*10)
+hindPC1.BM<-brownie.lite(lep.tree2,hind.pc1*10)
+
+forePC2.BM<-brownie.lite(lep.tree2,fore.pc2*10)
+hindPC2.BM<-brownie.lite(lep.tree2,hind.pc2*10)
 ```
 
 ### Discussion
