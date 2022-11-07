@@ -17,13 +17,17 @@ The Lepidoptera refers to the order of insects comprising of butterflies, moths,
 <br>
 To analyze the rate of wing-shape evolution in the Lepidoptera, photos of specimens across the entire order were first compiled using images cataloged in the Global Biodiversity Information Facility database. Approximately 200 species were included in this report. Wing shape was then digitized with the image analysis program FIJI. <br>
 <br>
-Outline-based shape analysis was performed using an elliptical Fourier transformation. To account for arbitrary differences in wing size due to the orientation of the original photos, a generalized Procrustes transformation was first applied. With this outline data, Principal Components Analysis was used to quantify the amount of variance observed due to a particular principal component (PC). These operations were run with the R package Momocs. When outlines were separately analyzed according to whether they were fore- or hind-wing, separate PC scores were obtained and compared. 
+Outline-based shape analysis was performed using an elliptical Fourier transformation. To account for arbitrary differences in wing size due to the orientation of the original photos and the lack of a scale bar in some cases, a generalized Procrustes transformation was first applied. With this outline data, Principal Components Analysis was used to quantify the amount of variance observed due to a particular principal component (PC). These operations were run with the R package Momocs. When outlines were separately analyzed according to whether they were fore- or hind-wing, separate PC scores were obtained and compared. 
 
 *Have major lineages of the Lepidoptera undergone significant shifts in evolutionary rate?* <br>
 <br>
-The phylogenetic tree used in the analysis of this report was created by @kawahara2019. To compare the rates of evolution throughout major Lepidoptera lineages, phylogenetic ridge regression by @kratsch2014 was used in the R package RRphylo.
-
-*Are hind- and forewing shapes correlated?*
+The phylogenetic tree used in the analysis of this report was created by @kawahara2019. To compare the rates of evolution throughout major Lepidoptera lineages, the non-censored test  by O'Meara et. Al (2006) was used within the R package phytools. After eliminating species from the original phylogenetic tree that were not included in this report, evolutionary rates were calculated for the first and second PCs in fore- and hind-wings
+<br>
+Next, phylogenetic ridge regression by @kratsch2014 was performed from the R package RRphylo to determine whether any rate shifts were to a slower or faster rate. Once clades were identified to have undergone a rate shift, the lineage name was identified and the scale of the shift was plotted on the phylogenetic tree. 
+<br>
+*Are hind- and forewing shapes correlated?*<br>
+<br>
+Correlation between hind- and fore-wing shape evolution was analyzed with Phylogenetic Independent Contrasts (PIC) analysis. Hind- and fore-wing PC vectors were regressed against one another for PC1 and PC2 and a linear model was fitted to the data. 
 
 ### Results
 ```{r, "Setup", include=FALSE}
