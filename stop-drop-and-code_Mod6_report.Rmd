@@ -9,6 +9,7 @@ bibliography: BIOL3140.bib
 ## Wing Shape Evolution in the Lepidoptera
 
 ### Introduction
+The Lepidoptera refers to the order of insects comprising of butterflies, moths, and skippers. Each of these organisms have two forewings and two hindwings, covered in scales. @owens2020comparative reports that forewing and hindwing evolution occurs independently, however, other studies like @chazot2016morpho report that there is a strong correlation between forewing and hindwing shapes (at least in the morpho group of butterflies). Due to this wide range of reports from different researchers, it is clear that more  analysis needs to be done to better understand wing development in the Lepidoptera. This project aims to elucidate whether or not fore- and hindwings vary in evolutionary rates, whether the evolvability of fore- and hindwings varies significantly among major lineages of moths and butterflies, and whether fore- and hindwing shape is correlated.
 
 ### Methods
 
