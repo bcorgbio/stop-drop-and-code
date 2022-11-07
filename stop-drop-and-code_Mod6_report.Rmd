@@ -37,7 +37,6 @@ library(vroom)
 library(ape)
 library(ggtree)
 library(wesanderson)
-setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology/Project 6")
 f <- list.files("class_out_data",pattern=".txt|.csv",full.names = TRUE)
 out <- read_delim(f[1],delim="\t") %>% 
   as.matrix()
@@ -118,14 +117,12 @@ hindwing.pca %>%
 
 #### Comparative Analysis
 ```{r, "Comparative Analysis", include=TRUE}
-setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology/Project 6")
 lep.tree <- ape::read.tree("lep_tree2.tre") %>% ladderize()
 lep.tree$tip.label <- gsub("_"," ",lep.tree$tip.label)
 plot(lep.tree,cex=0.1)
 ```
 
 ```{r, "Comparative Analysis Continued", include=FALSE}
-setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology/Project 6")
 lep.sp <- read_csv("lep_image_data.csv")
 out.data <- tibble(xy.file=basename(names(outs))) %>% 
   mutate(identifier=gsub("XY_|_hindwing|_forewing|.txt","",xy.file)) %>% 
@@ -265,7 +262,6 @@ plot_SS <- function(tre=NULL,SS=NULL,tax=NULL){
   return(list(plot=p,res=res))
   
 }
-setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology/Project 6")
 tax.names <- readRDS("Lep_classification.RDS")
 ```
 #### Forewing PC1
