@@ -37,7 +37,11 @@ library(vroom)
 library(ape)
 library(ggtree)
 library(wesanderson)
+<<<<<<< HEAD
 setwd("~/Downloads/BIOL3140 Experimental Methods in Organismal Biology/Project 6")
+=======
+
+>>>>>>> 3d97b0b4515a972fbdcd2b91fa2255d751fbbbfc
 f <- list.files("class_out_data",pattern=".txt|.csv",full.names = TRUE)
 out <- read_delim(f[1],delim="\t") %>% 
   as.matrix()
