@@ -21,7 +21,7 @@ Outline-based shape analysis was performed using an elliptical Fourier transform
 
 *Have major lineages of the Lepidoptera undergone significant shifts in evolutionary rate?* <br>
 <br>
-The phylogenetic tree used in the analysis of this report was created by @kawahara2019. To compare the rates of evolution throughout major Lepidoptera lineages, the non-censored test  by O'Meara et. Al (2006) was used within the R package phytools. After eliminating species from the original phylogenetic tree that were not included in this report, evolutionary rates were calculated for the first and second PCs in fore- and hind-wings
+The phylogenetic tree used in the analysis of this report was created by @kawahara2019. To compare the rates of evolution throughout major Lepidoptera lineages, the non-censored test  by @omeara2006 was used within the R package phytools. After eliminating species from the original phylogenetic tree that were not included in this report, evolutionary rates were calculated for the first and second PCs in fore- and hind-wings
 <br>
 Next, phylogenetic ridge regression by @kratsch2014 was performed from the R package RRphylo to determine whether any rate shifts were to a slower or faster rate. Once clades were identified to have undergone a rate shift, the lineage name was identified and the scale of the shift was plotted on the phylogenetic tree. 
 <br>
