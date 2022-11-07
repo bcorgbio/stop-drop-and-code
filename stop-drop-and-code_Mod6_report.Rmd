@@ -192,9 +192,13 @@ hindPC2.BM<-brownie.lite(lep.tree2,hind.pc2*10)
 
 ### Author Contributions 
 Rachel Z. (Introduction)
+
 Rachel R. (Methods, Bibliography)
+
 Jordan Nunes (Discussion)
+
 Michael Britt (Results)
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
