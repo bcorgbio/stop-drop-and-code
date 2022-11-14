@@ -1,0 +1,83 @@
+---
+title: "Module 5 Project Report"
+author: "stop_drop_and_code"
+date: "2022-10-10"
+output: html_document
+bibliography: [Mod5project.bib]
+---
+```{r, include=FALSE}
+library(tidyverse)
+library(knitr)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!-- for comments -->
+<style>
+div.comment pre { background-color:#ffbbbb; }
+div.comment pre.r { background-color:#ffbbbb; }
+div.comment {color: red;}
+</style>
+
+# Introduction
+It has been previously established that body temperature and thermoregulation play integral roles in maintaining homeostasis of the body during forms of physical activity. @Lim2008human reports that metabolic rate increases drastically during physical activity. Furthermore, this increase in metabolic rate causes an increase in heat production. However, thermoregulation allows us to continue to function and sustains physiological processes. Hyperthermia may also be utilized by the central nervous system to act as a limiting mechanism to prevent damage to the body. This experiment investigates the effect of physical activity on body temperature in humans using temperature sensors. 
+
+# Methods
+The effect of physical activity on body temperature was assessed by collecting readings of axillary body temperature readings during a resting state and after a period of physical activity. The resting state was defined as having a resting heart rate while sitting on a couch. The active state was defined as being five minute of jumping jacks. Temperature in Celsius was recorded for 100 seconds during the resting state and after the active state in the axillary (armpit) region of each subject. An Arduino unit was used as a prototype along with a DHT11 temperature sensor to measure temperature data. 
+
+# Results
+```{r, include=FALSE}
+library(tidyverse)
+dat.f <- list.files(pattern = "couch|active.csv") #find the files
+
+dat.l <- list() #make an empty list
+
+for(i in dat.f){
+  met.dat<- unlist(strsplit(i,"_")) #split of the filename string
+  who <- met.dat[1] #store the first element
+  activity <- gsub(".csv","",met.dat[2]) #store second element, dropping CSV with gsub()
+  dat.l[[i]]<- read_csv(i)%>%
+    mutate(who=who,activity=activity)#read, then store data with additional columns of metada in list as position unique to i
+}
+dat <- do.call(rbind,dat.l) #combine the list into table
+
+#Calculating mean and sd of data by activity and person
+mean_temp<-dat%>%
+group_by(activity,who)%>%
+  summarise_at(vars(degC),list(mean_degC=mean,sd_degC=sd))%>%
+  print()
+```
+```{r, echo=FALSE}
+#plotting the data, means, +/- 1SD
+mean_temp%>%
+  ggplot(aes(x=activity,y=mean_degC))+geom_point(size=5, color="pink")+facet_grid(.~who)+geom_errorbar(aes(ymin=mean_degC-sd_degC,ymax=mean_degC+sd_degC),width=0.3)+labs(caption="Figure 1. Mean of Axial Body Temperature Between Resting and Active States by Subject including +/- 1 Standard Deviation")
+```
+
+### Results Summary
+
+Our results show that 3/4 (Jordan, Michael, RachelZ) group members had higher mean active body temperatures than mean sedentary body temperatures. RachelR's mean active body temperature is slightly lower than her mean resting temperature, and the difference between mean active body temperature and mean resting body temperature for RachelR is also slightly lower than Jordan, Michael, and RachelZ's temperature differences. The SD error bars show that there was a smaller spread for RachelR's temperatures compared with the rest of the group members.
+
+# Discussion
+
+*Does body temperature vary in human subjects according to activity level?*
+
+The difference between sedentary and active body temperature as seen in the results section demonstrates that the temperature of the human body does not change significantly, in spite of physical exercise. According to @wendt2007thermoregulation, during exercise, several powerful physiological mechanisms of heat loss are activated to prevent an excessive rise in body core temperature. These findings are congruent to our results, and demonstrate that our bodies are capable of thermoregulation. 
+
+# Author Contributions
+
+Rachel R: Arduino setup, Arduino and R code, data collection 
+
+Rachel Z: Results Summary, R code, and Discussion
+
+Jordan: Results, Discussion, Data Collection
+
+Michael: Data collection and production of .csv files, Introduction, Results, Methods
+
+<div class="comment">
+Spot on! Excellent work!
+15/15
+</div>
+
+# References
