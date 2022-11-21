@@ -112,7 +112,7 @@ anova_thetamax<-anova(lm(theta_max~experiment,best.models))
 kable(anova_thetamax,caption="Table 1. Anova of Theta Max")
 ```
 ```{r,include=FALSE}
-#Sadly no, p-value ~0.055 so we can't reject the null hypothesis that there is no difference between the 2 groups.
+
 #Finding mean and SEM of shift in theta_max
 theta_max<-best.models%>%
   pivot_wider(id_cols=subject,names_from = experiment,values_from=theta_max)%>%
