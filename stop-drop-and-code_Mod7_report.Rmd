@@ -3,9 +3,14 @@ title: "stop-drop-and-code_Mod7_report"
 author: "stop-drop-and-code"
 date: "2022-11-21"
 output: html_document
+bibliography: BIOL3140.bib
 ---
 
-## Results
+### Introduction
+
+### Methods
+
+### Results
 ```{r,include=FALSE}
 library(tidyverse)
 library(MuMIn)
@@ -123,3 +128,15 @@ theta_max<-best.models%>%
 ```{r}
 kable(theta_max,caption="Table 2.Mean and SEM Theta Max ")
 ```
+
+### Discussion
+
+### Author Contributions
+
+Rachel Ruggera
+
+Rachel Zhu
+
+Michael Britt (Introduction)
+
+Jordan Nunes
