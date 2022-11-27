@@ -140,6 +140,9 @@ kable(theta_max,caption="Table 2.Mean and SEM Theta Max ")
 ```
 
 ### Discussion
+*Do class-wide force-angle data for isometric MVC accord to a typical FL relationship both under control and fatigued conditions?*
+
+*Is there a significant shift between θmax between the control and fatigue FL relationships?*
 
 ### Author Contributions
 
@@ -149,4 +152,4 @@ Rachel Zhu (Results)
 
 Michael Britt (Introduction, Bibliography)
 
-Jordan Nunes
+Jordan Nunes (Discussion)
