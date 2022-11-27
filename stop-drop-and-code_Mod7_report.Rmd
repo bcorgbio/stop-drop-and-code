@@ -19,7 +19,7 @@ library(knitr)
 ```
 ```{r,include=FALSE}
 #compiling metadata
-f<- list.files("***INSERT DATA FILE NAME HERE",full.names = T)
+f<- list.files("Project 8 data",full.names = T)
 f.l <- list()
 angs<- seq(45,168.75,length.out = 12)
 for(i in f){
@@ -52,7 +52,7 @@ dat_Fmax_norm<-dat_Fmax_norm%>%
   summarize(Fmax_norm=(recording_max/Fmax))%>%
   print()
 ```
-```{r,fig.cap="Figure 1. Normalized Fmax Values vs. Angle"}
+```{r,fig.cap="Figure 1. Normalized Fmax Values vs. Angle", echo=FALSE}
 #plot of normalized maxes by experiment
 dat_Fmax_norm%>%
   ggplot(aes(x=angle,y=Fmax_norm,col=experiment))+geom_point()
@@ -63,7 +63,7 @@ dat_Fmax_norm_mean<-dat_Fmax_norm%>%
   group_by(angle,experiment)%>%
   summarize(Fmax_norm_mean=mean(Fmax_norm))
 ```
-```{r,fig.cap="Figure 2. Mean Normalized Fmax vs. Angle"}
+```{r,fig.cap="Figure 2. Mean Normalized Fmax vs. Angle", echo=FALSE}
 #plot of means of normalized Fmax for each angle and experiment
 dat_Fmax_norm_mean%>%
   ggplot(aes(x=angle,y=Fmax_norm_mean,col=experiment))+geom_point()+labs(y="Mean Normalized Fmax", x="Angle")
@@ -73,7 +73,7 @@ dat_Fmax_norm_mean%>%
 poly.m2 <- lm(Fmax_norm~poly(angle,2),data=dat_Fmax_norm) #second order
 poly.m3 <- lm(Fmax_norm~poly(angle,3),data=dat_Fmax_norm) #third order
 poly.m4 <- lm(Fmax_norm~poly(angle,4),data=dat_Fmax_norm) #fourth order
-#seeing which model fits best for each experimental condition for each subject
+#which model fits best for each experimental condition for each subject
 poly.aic<-AICc(poly.m2,poly.m3,poly.m4) 
 print(poly.aic) #2nd order, poly.m2, has the best fit
 AICs <- dat_Fmax_norm%>%
@@ -113,7 +113,7 @@ best.models<-fits%>%
 #Is there a significant difference between control and fatigue theta_max? 
 anova_thetamax<-anova(lm(theta_max~experiment,best.models))
 ```
-```{r}
+```{r, echo=FALSE}
 kable(anova_thetamax,caption="Table 1. Anova of Theta Max")
 ```
 ```{r,include=FALSE}
@@ -125,7 +125,7 @@ theta_max<-best.models%>%
   ungroup()%>%
   summarize(mean.shift=mean(shift,na.rm=TRUE),se.shift=sd(shift,na.rm=TRUE)/sqrt(length(shift)))
 ```
-```{r}
+```{r, echo=FALSE}
 kable(theta_max,caption="Table 2.Mean and SEM Theta Max ")
 ```
 
@@ -135,7 +135,7 @@ kable(theta_max,caption="Table 2.Mean and SEM Theta Max ")
 
 Rachel Ruggera
 
-Rachel Zhu
+Rachel Zhu (Results)
 
 Michael Britt (Introduction, Bibliography)
 
