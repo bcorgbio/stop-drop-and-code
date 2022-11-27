@@ -1,7 +1,7 @@
 ---
 title: "Module 7 Report"
 author: "stop-drop-and-code"
-date: "2022-11-21"
+date: "2022-11-27"
 output: html_document
 bibliography: BIOL3140.bib
 ---
@@ -11,6 +11,14 @@ bibliography: BIOL3140.bib
 
 
 ### Methods
+
+*Do class-wide force-angle data for isometric MVC accord to a typical FL relationship both under control and fatigued conditions?*
+
+To gather force-angle data, a DAQ consisting of a 40-kg load cell, HX711 amplifier, and an Arduino Uno microcontroller were used. The system was not calibrated because this report will be analyzing normalized force. Each group member pulled on a dowel connected to the load cell at 12 different angles for 30 seconds (45-157.5 degrees at 11.25 degree intervals), flexing at the elbow to produce MVCs. A ganiometer was attached to the upper arm to measure angles. Twelve angles were recorded without any additional exercise as a control, and 12 were recorded after isokinetic eccentric exercise dropping a backpack for 3 minutes to serve as a fatiguing condition. After waiting 2 minutes following the exercise, the fatigue experiments were conducted in the same way as the control.
+
+These data were then analyzed to visualize force-length relationships in both conditions. First, data were normalized by taking the maximum force in each recording across all angles for each experiment for each individual, and dividing this Fmax by the Fmax for the experiment.
+
+*Is there a significant shift between θmax between the control and fatigue FL relationships?*
 
 ### Results
 ```{r,include=FALSE}
@@ -135,7 +143,7 @@ kable(theta_max,caption="Table 2.Mean and SEM Theta Max ")
 
 ### Author Contributions
 
-Rachel Ruggera
+Rachel Ruggera (Methods)
 
 Rachel Zhu (Results)
 
