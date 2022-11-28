@@ -8,7 +8,8 @@ bibliography: BIOL3140.bib
 
 ### Introduction
 
-
+The force exerted by any given muscle is influenced by speed and length. A force-length (FL) relationship describes how the force exerted by a muscle is affected by length. This project examines how fatigue affects the FL relationship and how length affects muscle force. Previous work has shown that a fatigued muscle prefers to undergo force generation at longer lengths. According to @biewener2006tired, force depression of a fatigued muscle is associated with the FL relationship of that muscle shifting right. However, according to @macnaughton2006reports, force depression as a result of fatigue does not cause a significant shift to the right in the muscle’s FL relationship. The authors of @macnaughton2006reports came to this controversial conclusion by utilizing sonomicrometry, which allowed them to identify that the active force of the muscle in question should be calculated by using the passive force at the length of the inactive muscle, as opposed to the passive force at the fascicle length. 
+Finally, other work, detailed in @gauthier1993effects, claims that the shift of the FL relationship curve to the right with a fatigued muscle is due to the disruption of membrane depolarization. This idea suggests that force depression after fatigue does not have to do with the arrangement and execution of myofilament overlap, as claimed by @biewener2006tired, but is actually related to the molecular basis of muscle activation. Given the array of contrasting findings, our experiment aims to improve the understanding of the effect of fatigue on the FL relationship. This will be accomplished by creating isometric force-angle curves for the forearm flexor muscles of each subject while at their maximum voluntary contractions (MVC). Then, we will compare these results during eccentrically fatigued and non-fatigue conditions. This will allow us to comment on the fundamental procedures that drive muscle contraction and compare our conclusions to previous analyses.
 
 ### Methods
 
@@ -155,3 +156,5 @@ Rachel Zhu (Results)
 Michael Britt (Introduction, Bibliography)
 
 Jordan Nunes (Discussion)
+
+### Referemces
