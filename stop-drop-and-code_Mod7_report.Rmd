@@ -20,6 +20,8 @@ These data were then analyzed to visualize force-length relationships in both co
 
 *Is there a significant shift between θmax between the control and fatigue FL relationships?*
 
+To determine if there was a shift in θmax, the Fmax predicted by the best fitting polynomial model in both the control and fatigue were subtracted from each other. An ANOVA test was used to see if this shift was significant. The mean shift was calculated with SEM. 
+
 ### Results
 ```{r,include=FALSE}
 library(tidyverse)
