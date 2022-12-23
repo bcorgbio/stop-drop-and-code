@@ -1,0 +1,174 @@
+---
+title: "Module 7 Report"
+author: "stop-drop-and-code"
+date: "2022-11-27"
+output: html_document
+bibliography: BIOL3140.bib
+---
+
+### Introduction
+
+The force exerted by any given muscle is influenced by speed and length. A force-length (FL) relationship describes how the force exerted by a muscle is affected by length. This project examines how fatigue affects the FL relationship and how length affects muscle force. Previous work has shown that a fatigued muscle prefers to undergo force generation at longer lengths. According to @biewener2006tired, force depression of a fatigued muscle is associated with the FL relationship of that muscle shifting right. However, according to @macnaughton2006reports, force depression as a result of fatigue does not cause a significant shift to the right in the muscle’s FL relationship. The authors of @macnaughton2006reports came to this controversial conclusion by utilizing sonomicrometry, which allowed them to identify that the active force of the muscle in question should be calculated by using the passive force at the length of the inactive muscle, as opposed to the passive force at the fascicle length. 
+Finally, other work, detailed in @gauthier1993effects, claims that the shift of the FL relationship curve to the right with a fatigued muscle is due to the disruption of membrane depolarization. This idea suggests that force depression after fatigue does not have to do with the arrangement and execution of myofilament overlap, as claimed by @biewener2006tired, but is actually related to the molecular basis of muscle activation. Given the array of contrasting findings, our experiment aims to improve the understanding of the effect of fatigue on the FL relationship. This will be accomplished by creating isometric force-angle curves for the forearm flexor muscles of each subject while at their maximum voluntary contractions (MVC). Then, we will compare these results during eccentrically fatigued and non-fatigue conditions. This will allow us to comment on the fundamental procedures that drive muscle contraction and compare our conclusions to previous analyses.
+
+### Methods
+
+*Do class-wide force-angle data for isometric MVC accord to a typical FL relationship both under control and fatigued conditions?*
+
+To gather force-angle data, a DAQ consisting of a 40-kg load cell, HX711 amplifier, and an Arduino Uno microcontroller were used. The system was not calibrated because this report will be analyzing normalized force. Each group member pulled on a dowel connected to the load cell at 12 different angles for 30 seconds (45-157.5 degrees at 11.25 degree intervals), flexing at the elbow to produce MVCs. A ganiometer was attached to the upper arm to measure angles. Twelve angles were recorded without any additional exercise as a control, and 12 were recorded after isokinetic eccentric exercise dropping a backpack for 3 minutes to serve as a fatiguing condition. After waiting 2 minutes following the exercise, the fatigue experiments were conducted in the same way as the control.
+
+These data were then analyzed to visualize force-length relationships in both conditions. First, data were normalized by taking the maximum force in each recording across all angles for each experiment for each individual, and dividing this Fmax by the Fmax for the experiment. The FL relationship was modeled for each condition using the best fitting polynomial model determined by AICc. 
+
+*Is there a significant shift between θmax between the control and fatigue FL relationships?*
+
+To determine if there was a shift in θmax, the Fmax predicted by the best fitting polynomial model in both the control and fatigue were subtracted from each other. An ANOVA test was used to see if this shift was significant. The mean shift was calculated with SEM. 
+
+### Results
+```{r,include=FALSE}
+library(tidyverse)
+library(MuMIn)
+library(geiger)
+library(knitr)
+```
+```{r,include=FALSE}
+#compiling metadata
+f<- list.files("Project 8 data",full.names = T)
+f.l <- list()
+angs<- seq(45,168.75,length.out = 12)
+for(i in f){
+  f.i<-read_delim(i,delim = " ",show_col_types = FALSE, col_names = c("Reading","Force","Unit"))
+  m <- unlist(strsplit(i,"_"))
+  subject<-m[2]
+  angle<-(angs[which.min(abs(angs-as.numeric(m[3])))])
+  experiment<-gsub("\\..+","",m[4])
+  f.l[[i]]<-f.i%>%
+    mutate(subject=subject,angle=angle,experiment=experiment,)
+}
+dat<-do.call(rbind,f.l)
+```
+```{r,include=FALSE}
+#finding max of each recording
+dat_recording_max<-dat%>%
+  group_by(subject,angle,experiment)%>%
+  summarize(recording_max=max(abs(Force)))%>%
+  print()
+#finding max of each experiment
+dat_Fmax<-dat_recording_max%>%
+  group_by(subject,experiment)%>%
+  summarize(Fmax=max(recording_max))%>%
+  print()
+#normalizing the max values
+dat_Fmax_norm<-dat_recording_max%>%
+    left_join(dat_Fmax)
+dat_Fmax_norm<-dat_Fmax_norm%>%
+  group_by(angle,subject,experiment)%>%
+  summarize(Fmax_norm=(recording_max/Fmax))%>%
+  print()
+```
+```{r,fig.cap="Figure 1. Normalized Fmax Values vs. Angle", echo=FALSE}
+#plot of normalized maxes by experiment
+dat_Fmax_norm%>%
+  ggplot(aes(x=angle,y=Fmax_norm,col=experiment))+geom_point()
+```
+```{r,include=FALSE}
+#Do class-wide force-angle data for isometric MVC accord to a typical FL relationship both under control and fatigued conditions?
+dat_Fmax_norm_mean<-dat_Fmax_norm%>%
+  group_by(angle,experiment)%>%
+  summarize(Fmax_norm_mean=mean(Fmax_norm))
+```
+```{r,fig.cap="Figure 2. Mean Normalized Fmax vs. Angle", echo=FALSE}
+#plot of means of normalized Fmax for each angle and experiment
+dat_Fmax_norm_mean%>%
+  ggplot(aes(x=angle,y=Fmax_norm_mean,col=experiment))+geom_point()+labs(y="Mean Normalized Fmax", x="Angle")
+```
+```{r,include=FALSE}
+#time to model
+poly.m2 <- lm(Fmax_norm~poly(angle,2),data=dat_Fmax_norm) #second order
+poly.m3 <- lm(Fmax_norm~poly(angle,3),data=dat_Fmax_norm) #third order
+poly.m4 <- lm(Fmax_norm~poly(angle,4),data=dat_Fmax_norm) #fourth order
+#which model fits best for each experimental condition for each subject
+poly.aic<-AICc(poly.m2,poly.m3,poly.m4) 
+print(poly.aic) #2nd order, poly.m2, has the best fit
+AICs <- dat_Fmax_norm%>%
+  group_by(subject,experiment)%>%
+  summarize(
+    m2=AICc(lm(Fmax_norm~poly(angle,2))), #second order
+    m3=AICc(lm(Fmax_norm~poly(angle,3))), #third order
+    m4=AICc(lm(Fmax_norm~poly(angle,4))) #fourth order
+  )%>%
+  pivot_longer(m2:m4,names_to="model",values_to="AICc")%>%
+  print()
+```
+```{r,include=FALSE}
+#predicting values based on best fitting model for 1000 angles
+x.pred<-seq(45,157.5,length.out=1000)
+fits <- dat_Fmax_norm%>%
+  group_by(subject,experiment)%>%
+  summarize(
+    m2=predict(lm(Fmax_norm~poly(angle,2)),newdata=data.frame(angle=x.pred)), #second order
+    m3=predict(lm(Fmax_norm~poly(angle,3)),newdata=data.frame(angle=x.pred)), #third order
+    m4=predict(lm(Fmax_norm~poly(angle,4)),newdata=data.frame(angle=x.pred)) #fourth order
+  )%>%
+  pivot_longer(m2:m4,names_to="model")%>%
+  group_by(subject,experiment,model)%>%
+  summarize(theta_max=x.pred[which.max(value)])%>%
+  print()
+#combining AICs and fits
+best.models<-fits%>%
+  left_join(AICs)%>%
+  group_by(subject,experiment)%>%
+  mutate(best=AICc==min(AICc))%>%
+  filter(best==TRUE)%>%
+  select(-best)%>%
+  print()
+```
+```{r,include=FALSE}
+#Is there a significant difference between control and fatigue theta_max? 
+anova_thetamax<-anova(lm(theta_max~experiment,best.models))
+```
+```{r, echo=FALSE}
+kable(anova_thetamax,caption="Table 1. Anova of Theta Max")
+```
+```{r,include=FALSE}
+
+#Finding mean and SEM of shift in theta_max
+theta_max<-best.models%>%
+  pivot_wider(id_cols=subject,names_from = experiment,values_from=theta_max)%>%
+  mutate(shift=fatigue-control)%>%
+  ungroup()%>%
+  summarize(mean.shift=mean(shift,na.rm=TRUE),se.shift=sd(shift,na.rm=TRUE)/sqrt(length(shift)))
+```
+```{r, echo=FALSE}
+kable(theta_max,caption="Table 2.Mean and SEM Theta Max ")
+```
+### Summary of Results
+After max force values were normalized for each experiment, subject, and angle, the mean normalized max force for each angle by experiment type was found and plotted. It not clear that there is a clear difference between max force of the control and fatigue groups. For angle 135, there is no clear difference between the control and the fatigue groups. In the case of angle 180, the normalized max force of the fatigue group is higher than the control. For all other angles, however, the control max force is higher than the fatigue max force (Figure 2). Regarding whether there is a significant difference in theta max between control and fatigue groups, an ANOVA test showed that there was not a significant difference, with a p-value of 0.04999, however there was a mean shift in theta max of 8.358 degrees.
+
+### Discussion
+*Do class-wide force-angle data for isometric MVC accord to a typical FL relationship both under control and fatigued conditions?*
+*Is there a significant shift between θmax between the control and fatigue FL relationships?*
+
+This module tasked our group with analyzing the force-length relationship (FLR) property of skeletal muscles, specifically within the forearm flexor muscles. FLR can be summarized by muscles generating the greatest force when at their resting length, and the least amount of force when they are shortened or stretched relative to the resting length. This project specifically analyzed the impact that fatigue has on the FLR within the human upper limbs. It has been concluded that eccentric forces have had measurable effects on the FLR; however, studies have also shown that both eccentric and isometric forces affect torque–joint angle relationships, prompting muscle damage. (@butterfield2005is) 
+Through analysis of the class-wide dataset, our group determined that there was a significant mean shift between fatigue and control measurements within the maximum force-producing angles of about 8.6 degrees. Based on the analysis of the FLR and the utilization of ANOVA variance testing, we saw an upward shift from controlled to fatigued muscles that was significant at the 5% level. The studies conducted by our class will provide another level of advancement in the study of upper arm biomechanics.
+There has been a multitude of studies surrounding the FLR and specifically sarcomeres. One such study analyzed the FLR of mechanically isolated sarcomeres (@herzog2010the). This study concluded that though sarcomere forces are heavily dependent on sarcomere lengths for isometric conditions, they can also take on essentially any steady-state value dependent on the sarcomere’s contractile history. The study also delved into force enhancements within individual sarcomeres, which they hypothesized could be caused by the force-dependent attachment of titin to actin which shortens the sarcomeres resting spring length, therefore increasing its stiffness. Our group believes it would be beneficial to further study the role of the regulatory proteins that function in muscle contraction: troponin and tropomyosin. Continued analysis of these regulatory proteins could provide further insight into the force depression within sarcomeres and specifically their effect on the cross-bridge attachments to actin. Furthermore, it would be interesting to study the impact of a sarcomere’s contractile history within eccentric forces on non-isolated sarcomeres.
+
+### Author Contributions
+
+Rachel Ruggera (Methods)
+
+Rachel Zhu (Results)
+
+Michael Britt (Introduction, Bibliography)
+
+Jordan Nunes (Discussion)
+
+## CPK comments
+
+Excellent work. Great job putting the code together to model the shifts. And you found one!! Your discussion and intro are great, too, with sever key points made through literature.
+
+Congrats
+
+
+75/75
+
+### References
